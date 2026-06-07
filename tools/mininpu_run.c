@@ -4,14 +4,14 @@
 
 int main(void)
 {
-    struct mininpu_context context = {0};
+    struct mininpu_ctx *ctx = NULL;
 
-    if (mininpu_init(&context) != 0) {
+    if (mininpu_open(&ctx) != 0) {
         fprintf(stderr, "mini NPU runtime initialization failed\n");
         return 1;
     }
 
-    printf("mini NPU runtime initialized\n");
-    mininpu_shutdown(&context);
+    printf("mini NPU runtime %s initialized\n", mininpu_version());
+    mininpu_close(ctx);
     return 0;
 }
